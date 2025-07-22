@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Futoshiki Solver",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "futoshiki.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}
