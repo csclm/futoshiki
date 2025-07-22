@@ -159,12 +159,15 @@ print("Enter level in fufen notation")
 fufen = input()
 level = parseFuFen(fufen)
 print("Parsed Level:")
-workingLevel = createWorkingLevel(level)
+initialWorkingLevel = createWorkingLevel(level)
+solvedWorkingLevel = initialWorkingLevel
 print()
 
 # Gradually descend, allowing for more guesses each time
 for depth in range(1, 20):
-    solveWorkingLevel(workingLevel, depth)
+    solvedWorkingLevel = initialWorkingLevel.copy()
+    if solveWorkingLevel(solvedWorkingLevel, depth):
+        break
 
 print("Solution:")
-printCompletedLevel(workingLevel)
+printCompletedLevel(solvedWorkingLevel)
