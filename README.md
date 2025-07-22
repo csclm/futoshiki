@@ -37,7 +37,7 @@ It applies these rules until they can no longer be applied. At that point it's h
 
 ## Output
 
-The output is either a grid of numbers representing the solution, or a grid showing where the solver got stuck trying to solve the level
+The output is either a grid of numbers representing the solution, or an error message saying we couldn't find a solution (within the guess limit)
 
 ## Limitations
 
