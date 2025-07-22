@@ -132,7 +132,6 @@ def validMutations(workingLevel: WorkingLevel):
                     yield nextIteration
 
 def solveWorkingLevel(workingLevel: WorkingLevel, maxDepth: int, depth: int = 1) -> bool:
-    print("Solving, depth = ", depth, "maxDepth = ", maxDepth)
     appliedAnyRules = False
     while applyRules(workingLevel):
         # applyRules affects workingLevel and
@@ -160,14 +159,21 @@ fufen = input()
 level = parseFuFen(fufen)
 print("Parsed Level:")
 initialWorkingLevel = createWorkingLevel(level)
-solvedWorkingLevel = initialWorkingLevel
+printIncompleteWorkingLevel(initialWorkingLevel)
 print()
 
 # Gradually descend, allowing for more guesses each time
-for depth in range(1, 20):
+solvedWorkingLevel = None
+solved = False
+for depth in range(1, 7):
+    print("Solving with max depth ", depth)
     solvedWorkingLevel = initialWorkingLevel.copy()
     if solveWorkingLevel(solvedWorkingLevel, depth):
+        solved = True
         break
 
-print("Solution:")
-printCompletedLevel(solvedWorkingLevel)
+if solved:
+    print("Solution:")
+    printCompletedLevel(solvedWorkingLevel)
+else:
+    print("Could not find a solution.")
