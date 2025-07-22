@@ -33,8 +33,7 @@ The solver works by starting with all squares marked with all possible digits, t
 1. Lower-bound: If a square is on the high side of an inequality, remove all possibilities that are equal to or lower than the lowest possibility on the low side of that inequality
 1. Upper-bound: If a square is on the low side of an inequality, remove all possibilities that are equal to or greater than the highest possibility on the high side of that inequality
 
-It applies these rules until they can no longer be applied. At that point it's hit a wall, so it must continue the search by removing a possibility from the level and trying to continue. It iterates by trying to remove one possibility at a time.
-
+It applies these rules until they can no longer be applied. At that point it's hit a wall, so it must continue the search by "guessing" a possibility to remove from the level and continuing. To avoid making a chain of bad guesses, it tries to solve allowing for 1 guess, then 2, then so on.
 
 ## Output
 

@@ -1,3 +1,5 @@
+from itertools import count
+from typing import Optional
 from level import *
 
 def rowsAndCols(level: WorkingLevel):
@@ -129,8 +131,8 @@ def validMutations(workingLevel: WorkingLevel):
                 if isLevelValid(nextIteration):
                     yield nextIteration
 
-def solveWorkingLevel(workingLevel: WorkingLevel, depth: int = 0) -> bool:
-    print("Solving, depth = ", depth)
+def solveWorkingLevel(workingLevel: WorkingLevel, maxDepth: int, depth: int = 1) -> bool:
+    print("Solving, depth = ", depth, "maxDepth = ", maxDepth)
     appliedAnyRules = False
     while applyRules(workingLevel):
         # applyRules affects workingLevel and
@@ -145,10 +147,11 @@ def solveWorkingLevel(workingLevel: WorkingLevel, depth: int = 0) -> bool:
 
     # Here, we've reached a state where our rules can't advance us
     # further, so make a random mutation and try to keep solving
-    for nextIteration in validMutations(workingLevel):
-        if solveWorkingLevel(nextIteration, depth+1):
-            workingLevel.grid = nextIteration.grid
-            return True
+    if depth < maxDepth:
+        for nextIteration in validMutations(workingLevel):
+            if solveWorkingLevel(nextIteration, maxDepth, depth+1):
+                workingLevel.grid = nextIteration.grid
+                return True
     return False
 
 
@@ -158,11 +161,10 @@ level = parseFuFen(fufen)
 print("Parsed Level:")
 workingLevel = createWorkingLevel(level)
 print()
-didSolve = solveWorkingLevel(workingLevel)
 
-if didSolve:
-    print("Solution:")
-    printCompletedLevel(workingLevel)
-else:
-    print("Stuck!")
-    printIncompleteWorkingLevel(workingLevel)
+# Gradually descend, allowing for more guesses each time
+for depth in range(1, 20):
+    solveWorkingLevel(workingLevel, depth)
+
+print("Solution:")
+printCompletedLevel(workingLevel)
