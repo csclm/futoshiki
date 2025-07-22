@@ -68,7 +68,7 @@ def createWorkingLevel(level: ParsedLevel) -> WorkingLevel:
             return set(range(1,topValue+1)) 
         else:
             return set([int(square)])
-    return WorkingLevel([[possibilitiesForSquare(square, topValue) for square in row] for row in level.grid], level.inequalities)
+    return WorkingLevel([[possibilitiesForSquare(square) for square in row] for row in level.grid], level.inequalities)
 
 def printIncompleteWorkingLevel(level: WorkingLevel):
     dimension = len(level.grid)

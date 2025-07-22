@@ -12,6 +12,8 @@ def isLevelValid(level: WorkingLevel) -> bool:
         determined = set()
         possibilities = { num: 0 for num in range(1, len(level.grid)+1)}
         for square in rowCol:
+            if len(square) == 0:
+                return False
             if len(square) == 1:
                 determined.add(next(iter(square)))
             for num in square:
@@ -79,6 +81,8 @@ def applyLowerBoundRule(level: WorkingLevel) -> bool:
     for inequality in level.inequalities:
         lowSquare = level.grid[inequality.low[0]][inequality.low[1]]
         highSquare = level.grid[inequality.high[0]][inequality.high[1]]
+        if len(lowSquare) == 0:
+            continue
         for lowNum in range(1,min(lowSquare)+1):
             # remove all from the high square which are <= the minimum of the low square
             if lowNum in highSquare:
@@ -97,6 +101,8 @@ def applyUpperBoundRule(level: WorkingLevel):
     for inequality in level.inequalities:
         lowSquare = level.grid[inequality.low[0]][inequality.low[1]]
         highSquare = level.grid[inequality.high[0]][inequality.high[1]]
+        if len(highSquare) == 0:
+            continue
         for highNum in range(max(highSquare),topNum+1):
             #remove all from the high square which are <= the minimum of the low square
             if highNum in lowSquare:
