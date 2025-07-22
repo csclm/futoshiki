@@ -123,9 +123,7 @@ def applyRules(workingLevel: WorkingLevel):
 def validMutations(workingLevel: WorkingLevel):
     for row in range(len(workingLevel.grid)):
         for col in range(len(workingLevel.grid)):
-            for num in range(1, len(workingLevel.grid)+1):
-                if num not in workingLevel.grid[row][col]:
-                    continue
+            for num in workingLevel.grid[row][col]:
                 nextIteration = workingLevel.copy()
                 nextIteration.grid[row][col].discard(num)
                 if isLevelValid(nextIteration):
