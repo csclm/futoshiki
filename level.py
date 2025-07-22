@@ -12,10 +12,6 @@ class ParsedLevel:
     grid: List[List[str]]
     inequalities: List[Inequality]
 
-# Examples:
-# .>351./.2.5./.....^/.5.3./.432<.
-# ....7..<.<./.V...3.>..^./..^>.7.9.../..7...<6..^/3V7..V..V.8V9/.^.^3^..^<.7../...3.2.V.<.V/..^.<.8...>./.^..V.6.>..^.
-# ..>.>..<..../.>..>.2V..<../6^...>..>.^.9/9.V.<.V<....2/..>.^....V.^./2.<...V..V.>5/3<.V..>.>.>..8/...V.3.>..V./.>.<...^<.V.V.>.^
 def parseFuFen(fufen: str) -> ParsedLevel:
     lines = []
     inequalities = []
